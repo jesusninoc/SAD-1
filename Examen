@@ -1,0 +1,21 @@
+#ALMACENAR INFORMACIÓN SOBRE EL HARDWARE DEL EQUIPO EN UN FICHERO
+(Get-WmiObject Win32_AutochkSetting).SettingID | Out-File -FilePath C:\Users\David\Desktop\Datos\Hardware\Hardware.txt
+(Get-WmiObject Win32_BaseBoard).Manufacturer | Out-File -FilePath C:\Users\David\Desktop\Datos\Hardware\Hardware.txt 
+(Get-WmiObject Win32_BIOS).Version | Out-File -FilePath C:\Users\David\Desktop\Datos\Hardware\Hardware.txt 
+(Get-WmiObject Win32_Bus).DeviceID | Out-File -FilePath C:\Users\David\Desktop\Datos\Hardware\Hardware.txt 
+Get-WmiObject Win32_Processor | Out-File -FilePath C:\Users\David\Desktop\Datos\Hardware\Hardware.txt
+Get-WmiObject Win32_SystemEnclosure | Out-File -FilePath C:\Users\David\Desktop\Datos\Hardware\Hardware.txt 
+Get-WmiObject Win32_Battery | Out-File -FilePath C:\Users\David\Desktop\Datos\Hardware\Hardware.txt 
+Get-WmiObject Win32_Printer | Out-File -FilePath C:\Users\David\Desktop\Datos\Hardware\Hardware.txt 
+
+#Programas instalados
+Get-Package | Out-File -FilePath C:\Users\David\Desktop\Datos\Software\Software.txt 
+
+#Ver las actualizaciones instaladas en el sistema
+Get-HotFix | Select-Object HotFixID
+Get-Package | Select-Object Name | Where-Object Name -match "Actualización" | Format-Custom | Out-File -FilePath C:\Users\David\Desktop\Datos\Actualizaciones\Actualizaciones.txt 
+
+#Calcular hash para un archivo
+Get-FileHash -LiteralPath C:\Users\David\Desktop\Datos\Actualizaciones\Actualizaciones.txt -Algorithm MD5 | Out-File -FilePath C:\Users\David\Desktop\Datos\Actualizaciones\Integridad.txt 
+Get-FileHash -LiteralPath C:\Users\David\Desktop\Datos\Software\Software.txt -Algorithm MD5 | Out-File -FilePath C:\Users\David\Desktop\Datos\Software\Integridad.txt 
+Get-FileHash -LiteralPath C:\Users\David\Desktop\Datos\Hardware\Hardware.txt -Algorithm MD5 | Out-File -FilePath C:\Users\David\Desktop\Datos\Hardware\Integridad.txt 
