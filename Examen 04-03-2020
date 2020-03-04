@@ -1,3 +1,4 @@
+#FORMULARIO
 <form action="modo1.php" method="get">
 	<h1>formulario</h1>
 	<hr>
